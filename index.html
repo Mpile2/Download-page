@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOWNLOAD| SECURE VERIFICATION GATEWAY</title>
+    
+    <!-- ========================================================== -->
+    <!--  PASTE YOUR PROPELLERADS INTERSTITIAL SCRIPT TAG HERE      -->
+    <!-- ========================================================== -->
+    <!--  Example: <script src="//://your-zone-id.com"></script> -->
+    <!-- ========================================================== -->
+
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+            background-color: #030811;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: #000000;
+            padding: 45px 35px;
+            border-radius: 16px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.80);
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            box-sizing: border-box;
+            border: 1px solid #000000;
+        }
+        .status-header {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 22px;
+            font-weight: 800;
+            margin: 0 0 12px 0;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        .timer-text {
+            font-size: 11px;
+            font-weight: 800;
+            color: #ffffff;
+            display: inline-block;
+            padding: 6px 18px;
+            margin-bottom: 14px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            animation: timerPulse 1.5s infinite ease-in-out;
+            text-align: center;
+        }
+        @keyframes timerPulse {
+            0% { opacity: 0.85; }
+            50% { opacity: 1; transform: scale3d(1.02, 1.02, 1.02); }
+            100% { opacity: 0.85; }
+        }
+        /* FIXED: Changed to pure black to blend everything seamlessly */
+        .offer-card {
+            background-color: #030811;
+            padding: 24px;
+            box-sizing: border-box;
+            margin-bottom: 28px;
+            position: relative;
+            overflow: hidden;
+            min-height: 260px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.75);
+        }
+        .offer-title {
+            font-size: 12px;
+            font-weight: 800;
+            color: #white;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: opacity 0.3s ease, color 0.3s ease;
+            width: 100%;
+            text-align: center;
+        }
+        .movie-row {
+            display: flex;
+            gap: 12px;
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
+            justify-content: center;
+        }
+        .fade-out-down {
+            opacity: 0 !important;
+            transform: translateY(15px) !important;
+            pointer-events: none;
+        }
+        .info-panel {
+            position: absolute;
+            top: 55px;
+            left: 24px;
+            right: 24px;
+            bottom: 85px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(-10px);
+            visibility: hidden;
+            transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        .info-panel.visible {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+        .info-panel-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 10px;
+            width: 100%;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .info-panel-text {
+            font-size: 13px;
+            color: #94a3b8;
+            line-height: 1.6;
+            width: 100%;
+            margin: 0;
+            word-wrap: break-word;
+            text-align: center;
+        }
+        .failed-text { color: #ff4d4d !important; font-weight: 900; }
+        .success-text { color: #2ecc71 !important; font-weight: 900; }
+        
+        .spinner-container {
+            display: none;
+            margin-top: 16px;
+            width: 26px;
+            height: 26px;
+            position: relative;
+        }
+        .spinner-container.active { display: inline-block; }
+        .spinner-wheel {
+            width: 100%;
+            height: 100%;
+            border: 3px solid #111a26;
+            border-top: 3px solid #ff0055;
+            border-radius: 50%;
+            animation: spinLoop 0.8s linear infinite;
+        }
+        @keyframes spinLoop {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* FIXED: Set to absolute pure black to eliminate charcoal borders */
+        .movie-carousel-window {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            height: 130px;
+            border-radius: 4px;
+            border: 1px solid #111a26;
+            background: #000000;
+        }
+        .movie-slider-track { display: flex; width: 200%; height: 100%; }
+        .mini-movie-card { width: 50%; height: 100%; position: relative; box-sizing: border-box; overflow: hidden; display: flex; flex-direction: column; }
+        .mini-movie-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; }
+        .movie-overlay-scrim {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 75%;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0) 100%);
+            display: flex; align-items: flex-end; justify-content: center; padding: 10px 8px; box-sizing: border-box;
+        }
+        .movie-title-text { font-size: 11px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; text-align: center; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        .btn {
+            display: block; width: 100%; color: #ffffff; text-decoration: none; padding: 15px; border-radius: 4px;
+            font-weight: 800; font-size: 13px; border: none; cursor: pointer; text-align: center; box-sizing: border-box;
+            transition: background 0.2s, transform 0.1s, opacity 0.3s ease, visibility 0.3s ease;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .btn:active { transform: scale(0.97) !important; }
+        
+        .btn-offer { background: linear-gradient(90deg, #ff0055 0%, #d6004b 100%); box-shadow: 0 4px 15px rgba(255, 0, 85, 0.2); margin-top: 18px; }
+        .btn-offer:hover { background: linear-gradient(90deg, #ff2470 0%, #ed0b5f 100%); }
+        
+        .btn-verify {
+            background: linear-gradient(90deg, #ff0055 0%, #d6004b 100%); box-shadow: 0 4px 15px rgba(255, 0, 85, 0.2);
+            position: absolute; bottom: 24px; left: 24px; right: 24px; width: calc(100% - 48px); opacity: 0; visibility: hidden; transform: translateY(8px);
+        }
+        .btn-verify.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        .btn-verify:hover { background: linear-gradient(90deg, #ff2470 0%, #ed0b5f 100%); }
+        
+        .btn-proceed-final {
+            background: linear-gradient(90deg, #2ecc71 0%, #27ae60 100%); box-shadow: 0 4px 15px rgba(46, 204, 113, 0.2);
+            position: absolute; bottom: 24px; left: 24px; right: 24px; width: calc(100% - 48px); opacity: 0; visibility: hidden; transform: translateY(8px);
+        }
+        .btn-proceed-final.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        .btn-proceed-final:hover { background: linear-gradient(90deg, #2fdc7b 0%, #29be69 100%); }
+        
+        .btn-download {
+            background-color: #ffffff; color: #030811; margin-top: 0; opacity: 0; visibility: hidden; height: 0; padding: 0; overflow: hidden; transform: translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease, padding 0.2s ease, margin 0.2s ease;
+        }
+        .btn-download.visible { opacity: 1; visibility: visible; height: auto; padding: 15px; margin-top: 28px; transform: translateY(0); }
+        .btn-download:hover { background-color: #edf2f7; }
+        .footer-note { font-size: 10px; color: #white; margin-top: 24px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="status-header">
+            <div id="timer-badge" class="timer-text">AWAITING: 15S</div>
+            <h1 id="status-title">GENERATING LINK</h1>
+        </div>
+        
+        <div class="offer-card">
+            <div id="offer-card-title" class="offer-title">🎬 DOWNLOAD MORE MOVIES </div>
+            
+            <div id="movie-grid-row" class="movie-row">
+                <div class="movie-carousel-window">
+                    <div id="track-left" class="movie-slider-track">
+                        <div class="mini-movie-card">
+                            <img id="movie-img-1a" src="" alt="Thumbnail">
+                            <div class="movie-overlay-scrim"><div id="movie-title-1a" class="movie-title-text">SYNCHRONIZING...</div></div>
+                        </div>
+                        <div class="mini-movie-card">
+                            <img id="movie-img-1b" src="" alt="Thumbnail">
+                            <div class="movie-overlay-scrim"><div id="movie-title-1b" class="movie-title-text">SYNCHRONIZING...</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="movie-carousel-window">
+                    <div id="track-right" class="movie-slider-track">
+                        <div class="mini-movie-card">
+                            <img id="movie-img-2a" src="" alt="Thumbnail">
+                            <div class="movie-overlay-scrim"><div id="movie-title-2a" class="movie-title-text">SYNCHRONIZING...</div></div>
+                        </div>
+                        <div class="mini-movie-card">
+                            <img id="movie-img-2b" src="" alt="Thumbnail">
+                            <div class="movie-overlay-scrim"><div id="movie-title-2b" class="movie-title-text">SYNCHRONIZING...</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="info-panel" class="info-panel">
+                <div id="panel-main-title" class="info-panel-title">HUMAN CHECK REQUIRED</div>
+                <div id="panel-sub-text" class="info-panel-text"><b>PLEASE PROVE YOU ARE A HUMAN BY COMPLETING HUMAN VERIFICATION. AFTER COMPLETING PLEASE RETURN TO THIS TAB TO CONTINUE</b></div>
+                
+                <div id="verification-spinner" class="spinner-container">
+                    <div class="spinner-wheel"></div>
+                </div>
+            </div>
+            
+            <button id="proceed-btn" class="btn btn-offer">DOWNLOAD MORE</button>
+            <button id="verify-action-btn" class="btn btn-verify">VERIFICATION</button>
+            <button id="proceed-final-btn" class="btn btn-proceed-final">PROCEED TO OFFER</button>
+        </div>
+        
+        <button id="download-btn" class="btn btn-download">DOWNLOAD FILE</button>
+        <div class="footer-note">🔒 DYNAMIC VALIDATION LAYER ACTIVE</div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const leftPool = [
+                { title: "The Death of Robin Hood", img: "https://resizing.flixster.com/zwlm8oIG37jgov_RKEc2Y0HRNzE=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzL2VmOTM0NWNiLWEzOGEtNDc2MS04ZGQxLTBmOTliY2U0NTEzYi5qcGc=" },
+                { title: "Deadpool 3", img: "https://m.media-amazon.com/images/M/MV5BZTk5ODY0MmQtMzA3Ni00NGY1LThiYzItZThiNjFiNDM4MTM3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" },
+                { title: "Gladiator 2", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDToy2E0VdIneWs3TLTVSVv-5tKAGuHbc2hggsRWEjRZL1Lzv5VM2zle90C1yF3RXZT9df&s" }
+            ];
+
+            const rightPool = [
+                { title: "Supergirl", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQiZsjGtGczP_ElDZl9-MReV9p4VPCDhkjCMhPmQ-Xq4nGPxY9CDjz3NM6mN8J076s1dlt&s" },
+                { title: "Matrix 5", img: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f452aa2c-0c64-4bbf-b065-942b8dbda8bb/dh6744k-d6dbb81e-3f9d-4acb-9ba3-2c2b1707f2a4.png/v1/fill/w_745,h_1072,q_70,strp/the_matrix_5___starring_ryan_gosling_by_diamonddead_art_dh6744k-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTg0MSIsInBhdGgiOiIvZi9mNDUyYWEyYy0wYzY0LTRiYmYtYjA2NS05NDJiOGRiZGE4YmIvZGg2NzQ0ay1kNmRiYjgxZS0zZjlkLTRhY2ItOWJhMy0yYzJiMTcwN2YyYTQucG5nIiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.noJxCTcoqTcCpE6wQec4jsIP-1gPmOyoTjoW_0CTfJw" },
+                { title: "Avatar 3", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvF0VSQvUB7qWuMzzGpoe9ECVAf2-zNzBv7r6NQDUi5BEom7oMfcJ9w_2XqSw5WHdn1yjoBUJrO_sDqnd1Whs-5C1-4KgO0HymnwSdmQ&s=10" }
+            ];
+
+            let leftIndex = 0, rightIndex = 0;
+            const trackLeft = document.getElementById('track-left');
+            const trackRight = document.getElementById('track-right');
+
+            function initSlideshow() {
+                try {
+                    if(trackLeft && trackRight) {
+                        document.getElementById('movie-img-1a').src = leftPool[0].img;
+                        document.getElementById('movie-title-1a').textContent = leftPool[0].title.toUpperCase();
+                        document.getElementById('movie-img-2a').src = rightPool[0].img;
+                        document.getElementById('movie-title-2a').textContent = rightPool[0].title.toUpperCase();
+                    }
+                } catch(err) {
+                    console.error("Slideshow initialization caught: ", err);
+                }
+            }
+
+            function rotateSlides() {
+                if (trackLeft) {
+                    let nextLeftIndex = (leftIndex + 1) % leftPool.length;
+                    document.getElementById('movie-img-1b').src = leftPool[nextLeftIndex].img;
+                    document.getElementById('movie-title-1b').textContent = leftPool[nextLeftIndex].title.toUpperCase();
+                    trackLeft.style.transition = 'transform 1.2s cubic-bezier(0.25, 1, 0.5, 1)';
+                    trackLeft.style.transform = 'translate3d(-50%, 0, 0)';
+                    setTimeout(() => {
+                        document.getElementById('movie-img-1a').src = leftPool[nextLeftIndex].img;
+                        document.getElementById('movie-title-1a').textContent = leftPool[nextLeftIndex].title.toUpperCase();
+                        trackLeft.style.transition = 'none';
+                        trackLeft.style.transform = 'translate3d(0, 0, 0)';
+                        leftIndex = nextLeftIndex;
+                    }, 1200);
+                }
+                if (trackRight) {
+                    let nextRightIndex = (rightIndex + 1) % rightPool.length;
+                    document.getElementById('movie-img-2b').src = rightPool[nextRightIndex].img;
+                    document.getElementById('movie-title-2b').textContent = rightPool[nextRightIndex].title.toUpperCase();
+                    trackRight.style.transition = 'transform 1.2s cubic-bezier(0.25, 1, 0.5, 1)';
+                    trackRight.style.transform = 'translate3d(-50%, 0, 0)';
+                    setTimeout(() => {
+                        document.getElementById('movie-img-2a').src = rightPool[nextRightIndex].img;
+                        document.getElementById('movie-title-2a').textContent = rightPool[nextRightIndex].title.toUpperCase();
+                        trackRight.style.transition = 'none';
+                        trackRight.style.transform = 'translate3d(0, 0, 0)';
+                        rightIndex = nextRightIndex;
+                    }, 1200);
+                }
+            }
+
+            initSlideshow();
+            let slideshowInterval = setInterval(rotateSlides, 4000);
+            const proceedBtn = document.getElementById('proceed-btn');
+            const verifyActionBtn = document.getElementById('verify-action-btn');
+            const proceedFinalBtn = document.getElementById('proceed-final-btn');
+            const movieGridRow = document.getElementById('movie-grid-row');
+            const infoPanel = document.getElementById('info-panel');
+            const offerCardTitle = document.getElementById('offer-card-title');
+            const panelMainTitle = document.getElementById('panel-main-title');
+            const panelSubText = document.getElementById('panel-sub-text');
+            const verificationSpinner = document.getElementById('verification-spinner');
+
+            // --- CONFIGURATION ZONE ---
+            const cpaOfferUrl = "https://omg10.com/4/11102867"; // Your dynamic CPA network offer link
+            const finalDestinationUrl = "https://t.me";   // Destination link for 'PROCEED TO OFFER'
+            const offerTimeRequirement = 20;              // Required seconds off-tab (20 seconds)
+            // --------------------------
+
+            let hiddenCountdownTimer = null;
+            let timeSpentOnOffer = 0;
+            let isOfferTimerRunning = false;
+            let hasVerifiedSuccessfully = false;
+
+            if (proceedBtn) {
+                proceedBtn.addEventListener("click", function(event) {
+                    event.preventDefault();
+                    clearInterval(slideshowInterval);
+                    if(movieGridRow) movieGridRow.classList.add('fade-out-down');
+                    if(offerCardTitle) offerCardTitle.style.opacity = '0';
+                    proceedBtn.style.opacity = '0';
+                    proceedBtn.style.visibility = 'hidden';
+                    proceedBtn.style.pointerEvents = 'none';
+                    setTimeout(() => {
+                        if(offerCardTitle) {
+                            offerCardTitle.innerHTML = "🔒 SYSTEM CHECK";
+                            offerCardTitle.style.color = "#ffffff";
+                            offerCardTitle.style.opacity = "1";
+                        }
+                        if(infoPanel) infoPanel.classList.add('visible');
+                        if(verifyActionBtn) verifyActionBtn.classList.add('visible');
+                    }, 400);
+                });
+            }
+
+            if (verifyActionBtn) {
+                verifyActionBtn.addEventListener("click", function() {
+                    timeSpentOnOffer = 0;
+                    isOfferTimerRunning = true;
+                    if(verificationSpinner) verificationSpinner.classList.add('active');
+                    if(hiddenCountdownTimer) clearInterval(hiddenCountdownTimer);
+                    hiddenCountdownTimer = setInterval(function() {
+                        timeSpentOnOffer++;
+                        if (timeSpentOnOffer >= offerTimeRequirement) {
+                            clearInterval(hiddenCountdownTimer);
+                            isOfferTimerRunning = false;
+                            hasVerifiedSuccessfully = true;
+                        }
+                    }, 1000);
+                    window.open(cpaOfferUrl, '_blank');
+                });
+            }
+
+            if (proceedFinalBtn) {
+                proceedFinalBtn.addEventListener("click", function() {
+                    window.location.href = finalDestinationUrl;
+                });
+            }
+
+            document.addEventListener("visibilitychange", function() {
+                if (document.visibilityState === "visible") {
+                    if (isOfferTimerRunning && !hasVerifiedSuccessfully) {
+                        clearInterval(hiddenCountdownTimer);
+                        isOfferTimerRunning = false;
+                        if(verificationSpinner) verificationSpinner.classList.remove('active');
+                        if(panelMainTitle) { panelMainTitle.textContent = "VERIFICATION FAILED"; panelMainTitle.className = "info-panel-title failed-text"; }
+                        if(panelSubText) { panelSubText.innerHTML = "<b>PLEASE MAKE SURE YOU COMPLETE YOUR VERIFICATION TO CONTINUE.</b>"; }
+                        if(offerCardTitle) { offerCardTitle.innerHTML = "❌ ACTION REQUIRED"; offerCardTitle.style.color = "#ffffff"; }
+                    } 
+                    else if (!isOfferTimerRunning && hasVerifiedSuccessfully) {
+                        if(verificationSpinner) verificationSpinner.classList.remove('active');
+                        if(panelMainTitle) { panelMainTitle.textContent = "VERIFICATION COMPLETE"; panelMainTitle.className = "info-panel-title success-text"; }
+                        if(panelSubText) { panelSubText.innerHTML = "<b>YOUR SESSION PARAMETERS HAVE BEEN VALIDATED SUCCESSFULLY.</b>"; }
+                        if(offerCardTitle) { offerCardTitle.innerHTML = "IDENTITY CONFIRMED"; offerCardTitle.style.color = "#2ecc71"; }
+                        if (verifyActionBtn) { verifyActionBtn.classList.remove('visible'); setTimeout(() => { verifyActionBtn.style.display = 'none'; }, 400); }
+                        if (proceedFinalBtn) { proceedFinalBtn.classList.add('visible'); }
+                    }
+                }
+            });
+
+            // BASE DOWNLOAD CODE TIMERS
+            const urlParams = new URLSearchParams(window.location.search);
+            const encodedDestination = urlParams.get('dest');
+            const downloadButton = document.getElementById('download-btn');
+            const statusTitle = document.getElementById('status-title');
+            const timerBadge = document.getElementById('timer-badge');
+            
+            let secureTargetUrl = "https://t.me"; 
+            if (encodedDestination) { 
+                try {
+                    secureTargetUrl = atob(decodeURIComponent(encodedDestination));
+                } catch(e) {
+                    console.log("Parameter passing exception cleared.");
+                }
+            }
+
+            if (downloadButton) {
+                downloadButton.addEventListener("click", function(event) {
+                    setTimeout(function() {
+                        window.location.href = secureTargetUrl;
+                    }, 100); 
+                });
+            }
+
+            let timeRemaining = 15;
+            const countdownInterval = setInterval(function() {
+                timeRemaining--;
+                if (timeRemaining > 0) { timerBadge.textContent = `AWAITING: ${timeRemaining}S`; }
+                else {
+                    clearInterval(countdownInterval);
+                    statusTitle.innerHTML = "LINK AUTHENTICATED ✅";
+                    timerBadge.style.display = "none";
+                    if (downloadButton) { downloadButton.classList.add("visible"); }
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
