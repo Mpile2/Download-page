@@ -422,4 +422,63 @@
                         clearInterval(hiddenCountdownTimer);
                         isOfferTimerRunning = false;
                         if(verificationSpinner) verificationSpinner.classList.remove('active');
-                        if(panelMainTitle) { panelMainTitle.text
+                        if(panelMainTitle) { panelMainTitle.text"; }
+                        if(panelSubText) { panelSubText.innerHTML = "<b>PLEASE MAKE SURE YOU COMPLETE YOUR VERIFICATION TO CONTINUE.</b>"; }
+                        if(offerCardTitle) { offerCardTitle.innerHTML = "❌ ACTION REQUIRED"; offerCardTitle.style.color = "#ffffff"; }
+                    } 
+                    else if (!isOfferTimerRunning && hasVerifiedSuccessfully) {
+                        if(verificationSpinner) verificationSpinner.classList.remove('active');
+                        if(panelMainTitle) { panelMainTitle.textContent = "VERIFICATION COMPLETE"; panelMainTitle.className = "info-panel-title success-text"; }
+                        if(panelSubText) { panelSubText.innerHTML = "<b>YOUR SESSION PARAMETERS HAVE BEEN VALIDATED SUCCESSFULLY.</b>"; }
+                        if(offerCardTitle) { offerCardTitle.innerHTML = "IDENTITY CONFIRMED"; offerCardTitle.style.color = "#2ecc71"; }
+                        if (verifyActionBtn) { verifyActionBtn.classList.remove('visible'); setTimeout(() => { verifyActionBtn.style.display = 'none'; }, 400); }
+                        if (proceedFinalBtn) { proceedFinalBtn.classList.add('visible'); }
+                    }
+                }
+            });
+
+            // --- DECODER HARMONIZATION LAYER ---
+            let secureTargetUrl = "https://t.me"; // Ultimate Fallback Link
+            
+            function decodeInboundDestination() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const encodedParam = urlParams.get('dest');
+                
+                if (encodedParam) { 
+                    try {
+                        const decodedBase64 = atob(decodeURIComponent(encodedParam));
+                        secureTargetUrl = decodeURIComponent(decodedBase64.split('').map(function(c) {
+                            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                        }).join(''));
+                    } catch(err) {
+                        console.error("Decoding error caught:", err);
+                    }
+                }
+            }
+
+            decodeInboundDestination();
+
+            const downloadButton = document.getElementById('download-btn');
+            const statusTitle = document.getElementById('status-title');
+            const timerBadge = document.getElementById('timer-badge');
+            
+            let timeRemaining = 15;
+            const countdownInterval = setInterval(function() {
+                timeRemaining--;
+                if (timeRemaining > 0) { 
+                    timerBadge.textContent = `AWAITING: ${timeRemaining}S`; 
+                } else {
+                    clearInterval(countdownInterval);
+                    statusTitle.innerHTML = "LINK AUTHENTICATED ✅";
+                    timerBadge.style.display = "none";
+                    
+                    if (downloadButton) { 
+                        downloadButton.href = secureTargetUrl;
+                        downloadButton.classList.add("visible"); 
+                    }
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
