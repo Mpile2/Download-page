@@ -438,14 +438,18 @@
                 }
             });
 
-            // BASE DOWNLOAD CODE TIMERS
+             // BASE DOWNLOAD DECRYPTION LINK PARSER LAYER
             const urlParams = new URLSearchParams(window.location.search);
             const encodedDestination = urlParams.get('dest');
             const downloadButton = document.getElementById('download-btn');
             const statusTitle = document.getElementById('status-title');
             const timerBadge = document.getElementById('timer-badge');
             
+            // This Telegram link is a placeholder safety fallback ONLY. 
+            // It will be completely ignored and overridden by your custom links.
             let secureTargetUrl = "https://t.me"; 
+            
+            // Automatically captures, parses, and decodes the dynamic Base64 link
             if (encodedDestination) { 
                 try {
                     secureTargetUrl = atob(decodeURIComponent(encodedDestination));
@@ -454,12 +458,9 @@
                 }
             }
 
+            // Attaches your dynamically captured link instantly to the button
             if (downloadButton) {
-                downloadButton.addEventListener("click", function(event) {
-                    setTimeout(function() {
-                        window.location.href = secureTargetUrl;
-                    }, 100); 
-                });
+                downloadButton.href = secureTargetUrl;
             }
 
             let timeRemaining = 15;
@@ -473,6 +474,7 @@
                     if (downloadButton) { downloadButton.classList.add("visible"); }
                 }
             }, 1000);
+        
         });
     </script>
 </body>
