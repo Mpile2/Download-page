@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="monetag" content="abcb50bd3429c85ccaf4df8975627e92">
     <title>DOWNLOAD| SECURE VERIFICATION GATEWAY</title>
     
     <!-- ========================================================== -->
@@ -287,18 +286,18 @@
         <button id="download-btn" class="btn btn-download">DOWNLOAD FILE</button>
         <div class="footer-note">🔒 DYNAMIC VALIDATION LAYER ACTIVE</div>
     </div>
-    <script>
+      <script>
         document.addEventListener("DOMContentLoaded", function() {
             const leftPool = [
-                { title: "The Death of Robin Hood", img: "https://resizing.flixster.com/zwlm8oIG37jgov_RKEc2Y0HRNzE=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzL2VmOTM0NWNiLWEzOGEtNDc2MS04ZGQxLTBmOTliY2U0NTEzYi5qcGc=" },
-                { title: "Deadpool 3", img: "https://m.media-amazon.com/images/M/MV5BZTk5ODY0MmQtMzA3Ni00NGY1LThiYzItZThiNjFiNDM4MTM3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" },
-                { title: "Gladiator 2", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDToy2E0VdIneWs3TLTVSVv-5tKAGuHbc2hggsRWEjRZL1Lzv5VM2zle90C1yF3RXZT9df&s" }
+                { title: "The Death of Robin Hood", img: "https://unsplash.com" },
+                { title: "Deadpool 3", img: "https://unsplash.com" },
+                { title: "Gladiator 2", img: "https://unsplash.com" }
             ];
 
             const rightPool = [
-                { title: "Supergirl", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQiZsjGtGczP_ElDZl9-MReV9p4VPCDhkjCMhPmQ-Xq4nGPxY9CDjz3NM6mN8J076s1dlt&s" },
-                { title: "Matrix 5", img: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f452aa2c-0c64-4bbf-b065-942b8dbda8bb/dh6744k-d6dbb81e-3f9d-4acb-9ba3-2c2b1707f2a4.png/v1/fill/w_745,h_1072,q_70,strp/the_matrix_5___starring_ryan_gosling_by_diamonddead_art_dh6744k-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTg0MSIsInBhdGgiOiIvZi9mNDUyYWEyYy0wYzY0LTRiYmYtYjA2NS05NDJiOGRiZGE4YmIvZGg2NzQ0ay1kNmRiYjgxZS0zZjlkLTRhY2ItOWJhMy0yYzJiMTcwN2YyYTQucG5nIiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.noJxCTcoqTcCpE6wQec4jsIP-1gPmOyoTjoW_0CTfJw" },
-                { title: "Avatar 3", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvF0VSQvUB7qWuMzzGpoe9ECVAf2-zNzBv7r6NQDUi5BEom7oMfcJ9w_2XqSw5WHdn1yjoBUJrO_sDqnd1Whs-5C1-4KgO0HymnwSdmQ&s=10" }
+                { title: "Supergirl", img: "https://unsplash.com" },
+                { title: "Matrix 5", img: "https://unsplash.com" },
+                { title: "Avatar 3", img: "https://unsplash.com" }
             ];
 
             let leftIndex = 0, rightIndex = 0;
@@ -351,6 +350,7 @@
 
             initSlideshow();
             let slideshowInterval = setInterval(rotateSlides, 4000);
+
             const proceedBtn = document.getElementById('proceed-btn');
             const verifyActionBtn = document.getElementById('verify-action-btn');
             const proceedFinalBtn = document.getElementById('proceed-final-btn');
@@ -362,9 +362,9 @@
             const verificationSpinner = document.getElementById('verification-spinner');
 
             // --- CONFIGURATION ZONE ---
-            const cpaOfferUrl = "https://omg10.com/4/11102867"; // Your dynamic CPA network offer link
+            const cpaOfferUrl = "https://google.com"; // Your dynamic CPA network offer link
             const finalDestinationUrl = "https://t.me";   // Destination link for 'PROCEED TO OFFER'
-            const offerTimeRequirement = 20;              // Required seconds off-tab (20 seconds)
+            const offerTimeRequirement = 20;              // Required seconds off-tab
             // --------------------------
 
             let hiddenCountdownTimer = null;
@@ -392,7 +392,6 @@
                     }, 400);
                 });
             }
-
             if (verifyActionBtn) {
                 verifyActionBtn.addEventListener("click", function() {
                     timeSpentOnOffer = 0;
@@ -423,59 +422,4 @@
                         clearInterval(hiddenCountdownTimer);
                         isOfferTimerRunning = false;
                         if(verificationSpinner) verificationSpinner.classList.remove('active');
-                        if(panelMainTitle) { panelMainTitle.textContent = "VERIFICATION FAILED"; panelMainTitle.className = "info-panel-title failed-text"; }
-                        if(panelSubText) { panelSubText.innerHTML = "<b>PLEASE MAKE SURE YOU COMPLETE YOUR VERIFICATION TO CONTINUE.</b>"; }
-                        if(offerCardTitle) { offerCardTitle.innerHTML = "❌ ACTION REQUIRED"; offerCardTitle.style.color = "#ffffff"; }
-                    } 
-                    else if (!isOfferTimerRunning && hasVerifiedSuccessfully) {
-                        if(verificationSpinner) verificationSpinner.classList.remove('active');
-                        if(panelMainTitle) { panelMainTitle.textContent = "VERIFICATION COMPLETE"; panelMainTitle.className = "info-panel-title success-text"; }
-                        if(panelSubText) { panelSubText.innerHTML = "<b>YOUR SESSION PARAMETERS HAVE BEEN VALIDATED SUCCESSFULLY.</b>"; }
-                        if(offerCardTitle) { offerCardTitle.innerHTML = "IDENTITY CONFIRMED"; offerCardTitle.style.color = "#2ecc71"; }
-                        if (verifyActionBtn) { verifyActionBtn.classList.remove('visible'); setTimeout(() => { verifyActionBtn.style.display = 'none'; }, 400); }
-                        if (proceedFinalBtn) { proceedFinalBtn.classList.add('visible'); }
-                    }
-                }
-            });
-
-             // BASE DOWNLOAD DECRYPTION LINK PARSER LAYER
-            const urlParams = new URLSearchParams(window.location.search);
-            const encodedDestination = urlParams.get('dest');
-            const downloadButton = document.getElementById('download-btn');
-            const statusTitle = document.getElementById('status-title');
-            const timerBadge = document.getElementById('timer-badge');
-            
-            // This Telegram link is a placeholder safety fallback ONLY. 
-            // It will be completely ignored and overridden by your custom links.
-            let secureTargetUrl = "https://t.me"; 
-            
-            // Automatically captures, parses, and decodes the dynamic Base64 link
-            if (encodedDestination) { 
-                try {
-                    secureTargetUrl = atob(decodeURIComponent(encodedDestination));
-                } catch(e) {
-                    console.log("Parameter passing exception cleared.");
-                }
-            }
-
-            // Attaches your dynamically captured link instantly to the button
-            if (downloadButton) {
-                downloadButton.href = secureTargetUrl;
-            }
-
-            let timeRemaining = 15;
-            const countdownInterval = setInterval(function() {
-                timeRemaining--;
-                if (timeRemaining > 0) { timerBadge.textContent = `AWAITING: ${timeRemaining}S`; }
-                else {
-                    clearInterval(countdownInterval);
-                    statusTitle.innerHTML = "LINK AUTHENTICATED ✅";
-                    timerBadge.style.display = "none";
-                    if (downloadButton) { downloadButton.classList.add("visible"); }
-                }
-            }, 1000);
-        
-        });
-    </script>
-</body>
-</html>
+                        if(panelMainTitle) { panelMainTitle.text
